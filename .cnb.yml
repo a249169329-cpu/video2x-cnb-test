@@ -8,6 +8,9 @@ $:
         - vscode
       docker:
         build:
-          dockerfile: ./Dockerfile
+          dockerfile: .ide/Dockerfile
+          versionBy:
+            - .ide/Dockerfile
+            - .cnb.yml
       env:
         VIDEO2X_VERSION: "6.4.0"
