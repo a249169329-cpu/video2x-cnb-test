@@ -129,7 +129,7 @@ bash scripts/show_help_keywords.sh
 
 ```text
 nvidia-smi 成功
-vulkaninfo 成功
+vulkaninfo 成功识别 NVIDIA/L40
 setup_video2x.sh 成功
 test_upscale.sh 成功输出 mp4
 ```
@@ -137,7 +137,7 @@ test_upscale.sh 成功输出 mp4
 ### 不建议继续 Video2X 的情况
 
 ```text
-vulkaninfo 失败
+vulkaninfo 只看到 llvmpipe / CPU
 AppImage 无法启动
 Video2X 报 Vulkan device / GPU not found
 ```
@@ -150,7 +150,43 @@ Real-ESRGAN + Practical-RIFE + PyTorch CUDA
 
 更适合 CNB 的 NVIDIA GPU 环境。
 
-## 8. 不要提交的文件
+## 8. CNB 实测结论：CUDA 路线通过
+
+实测环境：
+
+```text
+GPU: NVIDIA L40
+Torch: 2.12.0+cu126
+CUDA available: True
+Video2X: 只识别 llvmpipe，走 CPU Vulkan，不推荐继续
+```
+
+### Real-ESRGAN 最小测试通过
+
+成功输出：
+
+```text
+/workspace/realesrgan-test/out/frame_out.png
+```
+
+### RIFE 最小补帧测试通过
+
+成功把官方测试视频从约 23.98 fps 补到约 47.95 fps：
+
+```text
+/workspace/output/standard-test-rife-2x.mp4
+```
+
+注意：RIFE 脚本如果缺 `moviepy`，可能音频合并失败，但视频补帧已经成功。可用 ffmpeg 手动合并原音频：
+
+```bash
+bash scripts/mux_rife_audio.sh \
+  /workspace/output/standard-test-rife-2x.mp4 \
+  /workspace/input/standard-test.mp4 \
+  /workspace/output/standard-test-rife-2x-audio.mp4
+```
+
+## 9. 不要提交的文件
 
 以下文件已被 `.gitignore` 忽略：
 
