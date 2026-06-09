@@ -1,0 +1,21 @@
+# Downloaded tools
+tools/Video2X-x86_64.AppImage
+
+# User media and generated outputs
+input/*
+!input/.gitkeep
+output/*
+!output/.gitkeep
+*.mp4
+*.mkv
+*.mov
+*.avi
+*.webm
+
+# Runtime logs/help snapshots
+video2x-help.txt
+*.log
+
+# OS/editor
+.DS_Store
+.vscode/

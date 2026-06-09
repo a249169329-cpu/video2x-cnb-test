@@ -1,0 +1,13 @@
+# CNB 云原生开发配置：启动 48GB 共享 GPU 开发环境测试 Video2X
+$:
+  vscode:
+    - name: video2x-cnb-gpu-test
+      runner:
+        tags: cnb:arch:amd64:gpu
+      services:
+        - vscode
+      docker:
+        build:
+          dockerfile: ./Dockerfile
+      env:
+        VIDEO2X_VERSION: "6.4.0"
