@@ -48,6 +48,23 @@ ffmpeg 是否存在
 
 如果 `vulkaninfo` 失败，Video2X 大概率跑不动；建议改用 PyTorch CUDA 路线：Real-ESRGAN + Practical-RIFE。
 
+### 如果 AppImage 报 GLIBC / GLIBCXX 缺失
+
+类似错误：
+
+```text
+GLIBC_2.38 not found
+GLIBCXX_3.4.32 not found
+```
+
+说明当前 CNB 环境基于 Ubuntu 22.04，系统运行库太旧。仓库已改为：
+
+```Dockerfile
+FROM ubuntu:24.04
+```
+
+你需要在 CNB 页面关闭旧开发环境，然后重新启动「云原生开发」，让 CNB 重新构建镜像。只在旧终端里重新执行脚本不会生效。
+
 ## 3. 下载 Video2X AppImage
 
 ```bash
