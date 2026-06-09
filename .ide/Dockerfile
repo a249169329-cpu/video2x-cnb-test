@@ -25,7 +25,6 @@ RUN apt-get update && apt-get install -y \
     openssh-server \
     && rm -rf /var/lib/apt/lists/*
 
-# Install code-server so CNB uses single-container mode.
 RUN curl -fsSL https://code-server.dev/install.sh | sh \
     && code-server --install-extension cnbcool.cnb-welcome \
     && code-server --install-extension redhat.vscode-yaml \
