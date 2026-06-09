@@ -5,11 +5,8 @@ $:
       runner:
         tags: cnb:arch:amd64:gpu
       docker:
-        build:
-          dockerfile: .ide/Dockerfile
-          versionBy:
-            - .ide/Dockerfile
-            - .cnb.yml
+        # 官方自定义开发环境写法：直接指向 Dockerfile
+        build: .ide/Dockerfile
       services:
         - vscode
         - docker
