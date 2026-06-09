@@ -4,13 +4,23 @@ $:
     - name: video2x-cnb-gpu-test
       runner:
         tags: cnb:arch:amd64:gpu
-      services:
-        - vscode
       docker:
         build:
           dockerfile: .ide/Dockerfile
           versionBy:
             - .ide/Dockerfile
             - .cnb.yml
+      services:
+        - vscode
+        - docker
       env:
         VIDEO2X_VERSION: "6.4.0"
+      stages:
+        - name: show runtime base
+          script: |
+            echo "== CNB runtime image check =="
+            cat /etc/os-release || true
+            ldd --version | head -n 1 || true
+            command -v code-server && code-server --version | head -n 1 || true
+            echo "== GPU =="
+            nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader || true
